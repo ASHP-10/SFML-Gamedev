@@ -7,11 +7,12 @@ public:
     Kumar();
     void run();
 private:
-    void processEvent(sf::Time);
-    void update(sf::Keyboard::Key, bool, sf::Time);
+    void processEvent();
+    void update(sf::Keyboard::Key, bool);
     void renderer();
-    void movement(int, float, sf::Time);
+    void movement(int, float);
 private:
     sf::RenderWindow render;
     sf::CircleShape circle;
+    sf::Time deltaTime;
 };
