@@ -1,20 +1,29 @@
 #include "Kumar.h"
 
 Kumar::Kumar() :
-    render(sf::VideoMode(1000, 1000), "kabuto san"), circle()
+    render(sf::VideoMode(1000, 1000), "kabuto san")
 {
-    circle.setFillColor(sf::Color::Blue);
-    circle.setRadius(30.32f);
-    circle.setPosition(500, 500);
+    circle.setRadius(100);
+    texS.loadFromFile("D:/Coding/Games using C++/ani/Assets/konio dio da.jpg");
+    std::cout << texS.getMaximumSize();
+    circle.setTexture(&texS);
 }
 
 void Kumar::run() {
 
-    sf::Clock clock;                        // starts the stopwatch time
+    sf::Clock clock;      // starts the stopwatch time
+    timeElapsed = sf::Time::Zero;
+    timePerFrame = sf::seconds(1.f / 60.f);
 
     while (render.isOpen()) {
-        deltaTime = clock.restart();       // returns the elapsed time and restarts the stopwatch
         processEvent();
+        timeElapsed += clock.restart();
+
+        while (timeElapsed > timePerFrame) {
+            timeElapsed -= timePerFrame;
+
+            processEvent();
+        }
         renderer();  
     }
 }
@@ -75,5 +84,5 @@ void Kumar::movement(int axis, float playerSpeed) {
     else
         pos.y += playerSpeed;
 
-    circle.move(pos * deltaTime.asSeconds());
+    circle.move(pos * timePerFrame.asSeconds());
 }

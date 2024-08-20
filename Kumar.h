@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Kumar
 {
@@ -14,5 +15,12 @@ private:
 private:
     sf::RenderWindow render;
     sf::CircleShape circle;
-    sf::Time deltaTime;
+    sf::Texture texS;
+    // sf::Time deltaTime;
+    sf::Time timeElapsed;
+    sf::Time timePerFrame;
+};
+
+namespace objects {
+    enum ID { adarsh, kumar, midhun};
 };
